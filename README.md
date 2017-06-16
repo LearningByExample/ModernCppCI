@@ -1,4 +1,4 @@
-# Modem C++ CI
+# Modern C++ CI
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](/LICENSE)
 
@@ -7,7 +7,14 @@
 | [![CLang  / GCC / XCode Builds](https://travis-ci.org/LearningByExample/ModernCppCI.svg?branch=master)](https://travis-ci.org/LearningByExample/ModernCppCI) | Linux (clang  / gcc) OSX (XCode 8 clang) |
 | [![Visual Studio Builds](https://ci.appveyor.com/api/projects/status/t6i95u07gw1gqhql/branch/master?svg=true)](https://ci.appveyor.com/project/juan-medina/moderncppci/branch/master)       | Windows (Visual Studio 2017 /2015 / 2013)  |
 
-# Project Structure
+## info
+This is an example of doing a Modern C++ project with CI.
+
+It use basic [C++14](https://isocpp.org/wiki/faq/cpp14-language) syntax, but nothing really complicated.
+
+[CMake](https://cmake.org/) is the chosen build system and for test it uses [catch](https://github.com/philsquared/Catch).
+
+# project structure
 
 | folder       | Content              |
 | ------------ | -------------------- |
@@ -18,7 +25,7 @@
 | [/test/src](/test/src) | test sources |
 | [/test/include](/test/include) | test includes        |
 
-# Usage
+# usage
 
 Linux and Mac Debug
 
@@ -73,3 +80,13 @@ Windows Win32 Release
   msbuild ModernCppCI.sln
   ctest -V -C Release
 ```
+
+# references
+
+- https://github.com/philsquared/Catch
+- https://github.com/cognitivewaves/CMake-VisualStudio-Example
+- http://derekmolloy.ie/hello-world-introductions-to-cmake/
+- https://cmake.org/Wiki/CMake/Testing_With_CTest
+- https://www.appveyor.com/docs/lang/cpp/
+- https://docs.travis-ci.com/user/languages/cpp/
+- https://github.com/philsquared/Catch/blob/master/docs/build-systems.md
