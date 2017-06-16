@@ -8,7 +8,7 @@ matrix:
     - os: linux
       compiler: gcc
       addons: *gcc6
-      env: COMPILER='g++-6' BUILD_TYPE='Release'
+      env: COMPILER='g++-6' BUILD_TYPE='Release' CXX='g++-6'
 
     - os: linux
       compiler: gcc
@@ -54,7 +54,7 @@ install:
 before_script:
   - export CXX=${COMPILER}
   - cd ${TRAVIS_BUILD_DIR}
-  - cmake -H. -BBuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -D$CMAKE_CXX_COMPILER=${COMPILER} -Wdev
+  - cmake -H. -BBuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -Wdev
   - cd Build
 
 script:
