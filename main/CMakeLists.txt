@@ -1,9 +1,17 @@
-#app
+# CMake build : main application
 
-include_directories ("${PROJECT_SOURCE_DIR}/main/include")
+#configure directories
+set(SOURCE_PATH "${PROJECT_SOURCE_DIR}/main")
+set(SRC_PATH  "${SOURCE_PATH}/src" )
+set(INCLUDE_PATH  "${SOURCE_PATH}/include" )
 
-file(GLOB HEADER_FILES "${PROJECT_SOURCE_DIR}/main/include/*.hpp")
-file(GLOB SOURCE_FILES "${PROJECT_SOURCE_DIR}/main/src/*.cpp")
-set(MAIN_SOURCE "${PROJECT_SOURCE_DIR}/main/main.cpp")
+#set includes
+include_directories (${INCLUDE_PATH})
 
+#set sources
+file(GLOB HEADER_FILES "${INCLUDE_PATH}/*.hpp")
+file(GLOB SOURCE_FILES "${SRC_PATH}/*.cpp")
+set(MAIN_SOURCE "${SOURCE_PATH}/main.cpp")
+
+#set target executable
 add_executable(${PROJECT_NAME}App ${MAIN_SOURCE} ${SOURCE_FILES} ${HEADER_FILES})

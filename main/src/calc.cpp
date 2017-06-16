@@ -1,1 +1,8 @@
-// this should have a class implementation
+#include "Calc.hpp"
+
+namespace ModernCppCI {
+
+	Calc::Calc() {
+	};
+
+}

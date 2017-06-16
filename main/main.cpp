@@ -1,7 +1,13 @@
 #include<iostream>
 #include "Calc.hpp"
 
+using namespace std;
+using namespace ModernCppCI;
+
 int main(int argc, char *argv[]){
-   std::cout << "hello world";
+   cout << "Creating Calc" << endl;
+   
+   Calc calc();
+
    return 0;
 }
