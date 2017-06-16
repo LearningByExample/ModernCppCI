@@ -1,2 +1,4 @@
 Build
 Win32
+.idea/
+cmake-build-*/

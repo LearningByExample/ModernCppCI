@@ -2,7 +2,7 @@
 
 namespace ModernCppCI {
 
-	Calc::Calc() {
-	};
+    Calc::Calc() {
+    };
 
 }

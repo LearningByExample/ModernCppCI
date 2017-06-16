@@ -8,10 +8,10 @@
 
 namespace ModernCppCI {
 
-	class Calc {
-		public:
-			Calc();
-	};
+    class Calc {
+    public:
+        Calc();
+    };
 
 }
 
