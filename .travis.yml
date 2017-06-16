@@ -52,11 +52,9 @@ install:
     fi
 
 before_script:
-  - echo $COMPILER
   - export CXX=${COMPILER}
-  - echo $CXX
   - cd ${TRAVIS_BUILD_DIR}
-  - cmake -H. -BBuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -Wdev
+  - cmake -H. -BBuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -D$CMAKE_CXX_COMPILER={COMPILER} -Wdev
   - cd Build
 
 script:
