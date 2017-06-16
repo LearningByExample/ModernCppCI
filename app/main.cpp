@@ -9,5 +9,7 @@ int main(int argc, char *argv[]){
    
    Calc calc = Calc();
 
+   cout << "2 + 2 = " << calc["+"](2, 2) << endl;
+
    return 0;
 }

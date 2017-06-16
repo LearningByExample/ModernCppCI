@@ -6,12 +6,33 @@
 # pragma once
 #endif
 
+#include <map>
+#include <functional>
+
+using namespace std;
+
+
 namespace ModernCppCI {
 
-    class Calc {
-    public:
-        Calc();
-    };
+	template<class Type> using Dictionary = map<string, Type>;
+	typedef function<int(int, int)> Operation;
+
+	class Calc {
+	public:
+		Calc();
+
+		void addOperation(string name, Operation operation);
+		unsigned int totalOperations();
+		Operation operator[] (string name);
+
+	private:
+		Dictionary<Operation> operations = Dictionary<Operation>();
+		static Operation add;
+		static Operation sub;
+		static Operation mul;
+		static Operation div;
+		static Operation NoP;
+	};
 
 }
 
