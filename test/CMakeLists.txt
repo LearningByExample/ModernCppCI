@@ -1,7 +1,7 @@
 # CMake build : tests
 
 #configure directories
-set(SOURCE_PATH "${PROJECT_SOURCE_DIR}/main")
+set(SOURCE_PATH "${PROJECT_SOURCE_DIR}/app")
 set(SRC_PATH  "${SOURCE_PATH}/src" )
 set(INCLUDE_PATH  "${SOURCE_PATH}/include" )
 

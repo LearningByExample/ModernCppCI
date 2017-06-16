@@ -9,9 +9,10 @@
 namespace ModernCppCI {
 
 	class Calc {
-	public:
-		Calc();
+		public:
+			Calc();
 	};
+
 }
 
 #endif //CALC_HPP

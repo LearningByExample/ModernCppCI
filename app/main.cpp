@@ -7,7 +7,7 @@ using namespace ModernCppCI;
 int main(int argc, char *argv[]){
    cout << "Creating Calc" << endl;
    
-   Calc calc();
+   Calc calc = Calc();
 
    return 0;
 }
