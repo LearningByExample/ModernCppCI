@@ -17,6 +17,14 @@ namespace ModernCppCI {
         this->steps = other.steps;
     }
 
+	Calc & Calc::operator=(const Calc & other)
+	{
+		this->operations = other.operations;
+		this->steps = other.steps;
+
+		return *this;
+	}
+
     void Calc::addOperation(string name, Operation operation) {
         this->operations[name] = operation;
     }

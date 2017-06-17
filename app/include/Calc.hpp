@@ -26,6 +26,8 @@ namespace ModernCppCI {
 
         Calc(const Calc &other);
 
+		Calc& operator=(const Calc& other);
+
         void addOperation(string name, Operation operation);
 
         unsigned int totalOperations();
