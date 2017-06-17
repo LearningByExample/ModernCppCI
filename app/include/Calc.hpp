@@ -14,61 +14,68 @@ using namespace std;
 
 namespace ModernCppCI {
 
-	template<class Type> using Dictionary = map<string, Type>;
-	typedef function<int(int, int)> Operation;
+    template<class Type> using Dictionary = map<string, Type>;
+    typedef function<int(int, int)> Operation;
 
-	class CalcStep;
+    class CalcStep;
 
-	class Calc {
+    class Calc {
 
-	public:
-		Calc();
-		Calc(const Calc& other);
+    public:
+        Calc();
 
-		void addOperation(string name, Operation operation);
-		unsigned int totalOperations();
-		
-		Calc operator[] (string name);
-		Calc operator[] (int value);
-		unsigned int totalSteps();
+        Calc(const Calc &other);
 
-		int result() const;
+        void addOperation(string name, Operation operation);
 
-		friend std::ostream& operator<< (std::ostream& stream, const Calc& calc);
+        unsigned int totalOperations();
 
-	private:
-		list<CalcStep> steps;
-		Dictionary<Operation> operations = Dictionary<Operation>();
+        Calc operator[](string name);
 
-		static Operation add;
-		static Operation sub;
-		static Operation mul;
-		static Operation div;
-		static Operation NoP;
-	};
+        Calc operator[](int value);
 
-	class CalcStep {
+        unsigned int totalSteps();
 
-	private:
-		CalcStep();
+        int result() const;
 
-	public:
-		CalcStep(int value);
-		CalcStep(Operation operation);
+        friend std::ostream &operator<<(std::ostream &stream, const Calc &calc);
 
-		bool hasValue();
-		bool hasOperation();
+    private:
+        list <CalcStep> steps;
+        Dictionary<Operation> operations = Dictionary<Operation>();
 
-		int getValue();
-		Operation getOperation();
+        static Operation add;
+        static Operation sub;
+        static Operation mul;
+        static Operation div;
+        static Operation NoP;
+    };
 
-	private:
-		int _value;
-		Operation _operation;
+    class CalcStep {
 
-		bool _hasValue = false;
-		bool _hasOperation = false;
-	};
+    private:
+        CalcStep();
+
+    public:
+        CalcStep(int value);
+
+        CalcStep(Operation operation);
+
+        bool hasValue();
+
+        bool hasOperation();
+
+        int getValue();
+
+        Operation getOperation();
+
+    private:
+        int _value;
+        Operation _operation;
+
+        bool _hasValue = false;
+        bool _hasOperation = false;
+    };
 }
 
 #endif //CALC_HPP
