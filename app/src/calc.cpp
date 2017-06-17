@@ -17,7 +17,7 @@ namespace ModernCppCI {
         this->steps = other.steps;
     }
 
-	Calc & Calc::operator=(const Calc & other)
+	Calc & Calc::operator=(const Calc &other)
 	{
 		this->operations = other.operations;
 		this->steps = other.steps;
