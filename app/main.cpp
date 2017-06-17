@@ -4,12 +4,12 @@
 using namespace std;
 using namespace ModernCppCI;
 
-int main(int argc, char *argv[]){
-   cout << "Creating Calc" << endl;
-   
-   Calc calc = Calc();
+int main(int argc, char *argv[]) {
+	cout << "Creating Calc" << endl;
 
-   cout << "2 + 2 = " << calc["+"](2, 2) << endl;
+	Calc calc = Calc();
 
-   return 0;
+	cout << "1 + 2 * 5 - 1 / 4 = " << calc[1]["+"][2]["*"][5]["-"][1]["/"][4] << endl;
+
+	return 0;
 }
