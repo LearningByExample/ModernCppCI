@@ -18,25 +18,16 @@ It use basic [C++14](https://isocpp.org/wiki/faq/cpp14-language) syntax, but not
 
 | folder       | Content              |
 | ------------ | -------------------- |
-| [/app](app) | application |
+| [/app](/app) | application |
 | [/app/src](/app/src) | application sources  |
 | [/app/include](/app/include) | application includes |
 | [/test](/test) | application test |
 | [/test/src](/test/src) | test sources |
 | [/test/include](/test/include) | test includes        |
 
-# usage
+# example usages
 
-Linux and Mac Debug
-
-```shell
-  cmake -H. -BBuild -DCMAKE_BUILD_TYPE=Debug
-  cd Build
-  make
-  ctest -V
-```
-
-Linux and Mac Release
+Linux / MacOs: release auto detect compiler
 
 ```shell
   cmake -H. -BBuild -DCMAKE_BUILD_TYPE=Release
@@ -45,7 +36,16 @@ Linux and Mac Release
   ctest -V
 ```
 
-Windows x64 Debug
+MacOs: generate XCode debug project
+
+```shell
+  cmake -H. -BBuild -DCMAKE_BUILD_TYPE=Debug -G Xcode
+  cd Build
+  make
+  ctest -V
+```
+
+Visual Studio : x64 Debug auto detect compiler
 
 ```bat
   cmake -H. -BBuild -Ax64
@@ -54,31 +54,13 @@ Windows x64 Debug
   ctest -V -C Debug
 ```
 
-Windows Win32 Debug
+MinGW Debug
 
 ```bat
-  cmake -H. -BBuild -AWin32
+  cmake -H. -BBuild -DCMAKE_BUILD_TYPE=Debug -G "MinGW Makefiles"
   cd Build
-  msbuild ModernCppCI.sln
+  mingw32-make
   ctest -V -C Debug
-```
-
-Windows x64 Release
-
-```bat
-  cmake -H. -BBuild -Ax64
-  cd Build
-  msbuild ModernCppCI.sln
-  ctest -V -C Release
-```
-
-Windows Win32 Release
-
-```bat
-  cmake -H. -BBuild -AWin32
-  cd Build
-  msbuild ModernCppCI.sln
-  ctest -V -C Release
 ```
 
 # references
