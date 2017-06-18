@@ -14,70 +14,75 @@ using namespace std;
 
 namespace ModernCppCI {
 
-    template<class Type> using Dictionary = map<string, Type>;
-    typedef function<int(int, int)> Operation;
+  template<class Type> using Dictionary = map<string, Type>;
+  typedef function<int(const int&, const int&)> Operation;
 
-    class CalcStep;
+  class CalcStep;
 
-    class Calc {
+  class Calc {
 
-    public:
-        Calc();
+  public:
+    Calc();
 
-        Calc(const Calc &other);
+    Calc(const Calc &other);
 
-		Calc& operator=(const Calc& other);
+    Calc& operator=(const Calc& other);
 
-        void addOperation(string name, Operation operation);
+    void AddOperation(const string& name, const Operation& operation);
 
-        unsigned int totalOperations();
+    unsigned int total_operations() const;
 
-        Calc operator[](string name);
+    void AddStep(const CalcStep& step);
 
-        Calc operator[](int value);
+    Calc operator[](const string& name);
 
-        unsigned int totalSteps();
+    Calc operator[](const int& value);
 
-        int result() const;
+    unsigned int total_steps() const;
 
-        friend std::ostream &operator<<(std::ostream &stream, const Calc &calc);
+    int result() const;
 
-    private:
-        list <CalcStep> steps;
-        Dictionary<Operation> operations = Dictionary<Operation>();
+    friend std::ostream &operator<<(std::ostream &stream, const Calc &calc);
 
-        static Operation add;
-        static Operation sub;
-        static Operation mul;
-        static Operation div;
-        static Operation NoP;
-    };
+  private:
+    list <CalcStep> steps_;
+    Dictionary<Operation> operations_ = Dictionary<Operation>();
 
-    class CalcStep {
+  };
 
-    private:
-        CalcStep();
+  namespace DefaultOperations {
+    const Operation Plus = [] (const int& value1, const int& value2) { return value1 + value2; };
+    const Operation Minus = [] (const int& value1, const int& value2) { return value1 - value2; };
+    const Operation Times = [] (const int& value1, const int& value2) { return value1 * value2; };
+    const Operation Div = [] (const int& value1, const int& value2) { return value1 / value2; };
+    const Operation Zero = [] (const int& value1, const int& value2) { return 0; };
+  }
 
-    public:
-        CalcStep(int value);
+  class CalcStep {
 
-        CalcStep(Operation operation);
+  private:
+    CalcStep();
 
-        bool hasValue();
+  public:
+    CalcStep(const int& value);
 
-        bool hasOperation();
+    CalcStep(const Operation& operation);
 
-        int getValue();
+    bool has_value() const;
 
-        Operation getOperation();
+    bool has_operation() const;
 
-    private:
-        int _value;
-        Operation _operation;
+    int value() const;
 
-        bool _hasValue = false;
-        bool _hasOperation = false;
-    };
+    Operation operation() const;
+
+  private:
+    int value_;
+    Operation operation_;
+
+    bool has_value_ = false;
+    bool has_operation_ = false;
+  };
 }
 
 #endif //CALC_HPP

@@ -5,130 +5,127 @@ using namespace std;
 
 namespace ModernCppCI {
 
-    Calc::Calc() {
-        this->addOperation("+", add);
-        this->addOperation("-", sub);
-        this->addOperation("*", mul);
-        this->addOperation("/", div);
+  Calc::Calc() {
+    AddOperation("+", DefaultOperations::Plus);
+    AddOperation("-", DefaultOperations::Minus);
+    AddOperation("*", DefaultOperations::Times);
+    AddOperation("/", DefaultOperations::Div);
+  }
+
+  Calc::Calc(const Calc &other) : Calc() {
+    operations_ = other.operations_;
+    steps_ = other.steps_;
+  }
+
+  Calc& Calc::operator=(const Calc &other) {
+    operations_ = other.operations_;
+    steps_ = other.steps_;
+
+    return *this;
+  }
+
+  void Calc::AddOperation(const string& name, const Operation& operation) {
+    operations_[name] = operation;
+  }
+
+  unsigned int Calc::total_operations() const {
+    return operations_.size();
+  }
+
+  void Calc::AddStep(const CalcStep & step) {
+    steps_.push_back(step);
+  }
+
+  Calc Calc::operator[](const string& name) {
+    auto operation = operations_[name];
+
+    if (operation == nullptr) {
+      operation = DefaultOperations::Zero;
     }
 
-    Calc::Calc(const Calc &other) : Calc() {
-        this->operations = other.operations;
-        this->steps = other.steps;
-    }
+    auto new_calc = Calc(*this);
 
-	Calc & Calc::operator=(const Calc &other)
-	{
-		this->operations = other.operations;
-		this->steps = other.steps;
+    new_calc.AddStep(operation);
 
-		return *this;
-	}
+    return new_calc;
+  }
 
-    void Calc::addOperation(string name, Operation operation) {
-        this->operations[name] = operation;
-    }
+  Calc Calc::operator[](const int& value) {
+    auto new_calc = Calc(*this);
 
-    unsigned int Calc::totalOperations() {
-        return this->operations.size();
-    }
+    new_calc.AddStep(value);
 
-    Calc Calc::operator[](string name) {
-        auto operation = this->operations[name];
+    return new_calc;
+  }
 
-        if (operation == nullptr) {
-            operation = NoP;
+  unsigned int Calc::total_steps() const {
+    return steps_.size();
+  }
+
+  int Calc::result() const {
+    int total = 0;
+    Operation operation_to_execute = DefaultOperations::Zero;
+    bool execute_operation = false;
+    bool first_value = true;
+
+    for (auto step : steps_) {
+      if (step.has_operation()) {
+        operation_to_execute = step.operation();
+        execute_operation = true;
+        continue;
+      }
+
+      if (step.has_value()) {
+        if (first_value) {
+          total = step.value();
+          first_value = false;
+          continue;
         }
-
-        auto step = CalcStep(operation);
-        this->steps.push_back(step);
-
-        return Calc(*this);
-    }
-
-    Calc Calc::operator[](int value) {
-        auto step = CalcStep(value);
-        this->steps.push_back(step);
-
-        return Calc(*this);
-    }
-
-    unsigned int Calc::totalSteps() {
-        return steps.size();
-    }
-
-    int Calc::result() const {
-        int total = 0;
-        Operation lastOperation = NoP;
-        bool nextExecute = false;
-        bool firstValue = true;
-
-        for (auto step : steps) {
-            if (step.hasOperation()) {
-                lastOperation = step.getOperation();
-                nextExecute = true;
-                continue;
-            }
-
-            if (step.hasValue()) {
-
-                if (firstValue) {
-                    total = step.getValue();
-                    firstValue = false;
-                    continue;
-                }
-
-                if (nextExecute) {
-                    total = lastOperation(total, step.getValue());
-                    nextExecute = false;
-                }
-            }
+        if (execute_operation) {
+          total = operation_to_execute(total, step.value());
+          execute_operation = false;
         }
-
-        return total;
+      }
     }
 
-    Operation Calc::add = [](int value1, int value2) { return value1 + value2; };
-    Operation Calc::sub = [](int value1, int value2) { return value1 - value2; };
-    Operation Calc::mul = [](int value1, int value2) { return value1 * value2; };
-    Operation Calc::div = [](int value1, int value2) { return value1 / value2; };
-    Operation Calc::NoP = [](int value1, int value2) { return 0; };
+    return total;
+  }
 
-    CalcStep::CalcStep() {
-        this->_hasValue = false;
-        this->_hasOperation = false;
-    }
+  CalcStep::CalcStep() {
+    has_value_ = false;
+    has_operation_ = false;
+  }
 
-    CalcStep::CalcStep(int value) : CalcStep() {
-        this->_value = value;
-        this->_hasValue = true;
-    }
+  CalcStep::CalcStep(const int& value) : CalcStep() {
+    value_ = value;
+    has_value_ = true;
+  }
 
-    CalcStep::CalcStep(Operation operation) : CalcStep() {
-        this->_operation = operation;
-        this->_hasOperation = true;
-    }
+  CalcStep::CalcStep(const Operation& operation) : CalcStep() {
+    operation_ = operation;
+    has_operation_ = true;
+  }
 
-    bool CalcStep::hasValue() {
-        return _hasValue;
-    }
+  bool CalcStep::has_value() const {
+    return has_value_;
+  }
 
-    bool CalcStep::hasOperation() {
-        return _hasOperation;
-    }
+  bool CalcStep::has_operation() const {
+    return has_operation_;
+  }
 
-    int CalcStep::getValue() {
-        return _value;
-    }
+  int CalcStep::value() const {
+    return value_;
+  }
 
-    Operation CalcStep::getOperation() {
-        return _operation;
-    }
+  Operation CalcStep::operation() const {
+    return operation_;
+  }
 
-    std::ostream &operator<<(std::ostream &stream, const Calc &calc) {
-        stream << calc.result();
+  std::ostream &operator<<(std::ostream &stream, const Calc &calc) {
+    stream << calc.result();
 
-        return stream;
-    }
+    return stream;
+  }
 
 }
