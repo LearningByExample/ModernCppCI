@@ -6,6 +6,7 @@
 # pragma once
 #endif
 
+#include <ostream>
 #include <map>
 #include <functional>
 #include <list>
@@ -24,7 +25,7 @@ namespace ModernCppCI {
   public:
     Calc();
 
-    Calc(const Calc &other);
+    Calc(const Calc& other);
 
     Calc& operator=(const Calc& other);
 
@@ -42,7 +43,7 @@ namespace ModernCppCI {
 
     int result() const;
 
-    friend std::ostream &operator<<(std::ostream &stream, const Calc &calc);
+    friend std::ostream &operator<<(std::ostream &stream, const Calc& calc);
 
   private:
     list <CalcStep> steps_;

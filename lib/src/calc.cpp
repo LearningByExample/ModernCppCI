@@ -1,5 +1,4 @@
-#include "Calc.hpp"
-#include<iostream>
+#include "calc.hpp"
 
 using namespace std;
 
@@ -17,7 +16,7 @@ namespace ModernCppCI {
     steps_ = other.steps_;
   }
 
-  Calc& Calc::operator=(const Calc &other) {
+  Calc& Calc::operator=(const Calc& other) {
     operations_ = other.operations_;
     steps_ = other.steps_;
 
@@ -32,7 +31,7 @@ namespace ModernCppCI {
     return operations_.size();
   }
 
-  void Calc::AddStep(const CalcStep & step) {
+  void Calc::AddStep(const CalcStep& step) {
     steps_.push_back(step);
   }
 
@@ -122,9 +121,8 @@ namespace ModernCppCI {
     return operation_;
   }
 
-  std::ostream &operator<<(std::ostream &stream, const Calc &calc) {
+  std::ostream &operator<<(std::ostream &stream, const Calc& calc) {
     stream << calc.result();
-
     return stream;
   }
 

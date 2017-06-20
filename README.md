@@ -18,10 +18,13 @@ It use basic [C++14](https://isocpp.org/wiki/faq/cpp14-language) syntax, but not
 
 | folder       | Content              |
 | ------------ | -------------------- |
+| [/lib](/lib) | library |
+| [/lib/src](/lib/src) | library sources  |
+| [/lib/include](/lib/include) | library includes |
 | [/app](/app) | application |
 | [/app/src](/app/src) | application sources  |
 | [/app/include](/app/include) | application includes |
-| [/test](/test) | application test |
+| [/test](/test) | test |
 | [/test/src](/test/src) | test sources |
 | [/test/include](/test/include) | test includes        |
 
@@ -72,3 +75,4 @@ MinGW Debug
 - https://www.appveyor.com/docs/lang/cpp/
 - https://docs.travis-ci.com/user/languages/cpp/
 - https://github.com/philsquared/Catch/blob/master/docs/build-systems.md
+- https://stackoverflow.com/questions/14446495/cmake-project-structure-with-unit-tests

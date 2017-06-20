@@ -1,5 +1,5 @@
-#include<iostream>
-#include "Calc.hpp"
+#include "calc.hpp"
+#include <iostream>
 
 using namespace std;
 using namespace ModernCppCI;

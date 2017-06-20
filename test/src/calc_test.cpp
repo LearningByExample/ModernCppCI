@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "Calc.hpp"
+#include "calc.hpp"
 #include <memory>
 #include <iostream>
 
@@ -8,6 +8,7 @@ using namespace std;
 namespace ModernCppCI {
 
   namespace Test {
+
     TEST_CASE("calc should be created", "[calc]") {
       auto calc = make_unique<Calc>();
 
