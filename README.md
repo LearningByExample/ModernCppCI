@@ -21,12 +21,14 @@ It use basic [C++14](https://isocpp.org/wiki/faq/cpp14-language) syntax, but not
 | [/lib](/lib) | library |
 | [/lib/src](/lib/src) | library sources  |
 | [/lib/include](/lib/include) | library includes |
+| [/lib/test](/lib/test) | library test |
 | [/app](/app) | application |
 | [/app/src](/app/src) | application sources  |
 | [/app/include](/app/include) | application includes |
-| [/test](/test) | test |
+| [/app/test](/app/test) | application test |
 | [/test/src](/test/src) | test sources |
 | [/test/include](/test/include) | test includes        |
+| [/third_party](/third_party) | third party software        |
 
 # example usages
 
