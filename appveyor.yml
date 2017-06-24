@@ -20,8 +20,9 @@ platform:
   - Win32
   - x64
 
-environment:
-  BOOST_ROOT: C:\Libraries\boost_1_63_0
+install:
+        - ps: >-
+          $env:BOOST_ROOT=C:\Libraries\boost_1_63_0
 
 # build Configurations, i.e. Debug, Release, etc.
 configuration:
@@ -30,7 +31,7 @@ configuration:
 
 #Cmake will autodetect the compiler, but we set the arch
 before_build:
-  - cmake -H. -BBuild -A%PLATFORM% -DBOOST_ROOT="%BOOST_ROOT%"
+  - cmake -H. -BBuild -A%PLATFORM%
 
 # build with MSBuild
 build:
