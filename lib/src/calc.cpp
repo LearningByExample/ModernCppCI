@@ -1,4 +1,3 @@
-#include "boost/current_function.hpp"
 #include "calc.hpp"
 
 using namespace std;
@@ -67,7 +66,7 @@ namespace ModernCppCI {
 
   int Calc::result() const {
 
-    logger_.debug("[{}]", BOOST_CURRENT_FUNCTION);
+    logger_.debug("[{}]", __func__);
 
     int total = 0;
     logger_.trace("total is {}", total);
@@ -101,7 +100,7 @@ namespace ModernCppCI {
       }
     }
 
-    logger_.debug("[{}] = {}", BOOST_CURRENT_FUNCTION, total);
+    logger_.debug("[{}] = {}", __func__, total);
 
     return total;
   }

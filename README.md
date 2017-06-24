@@ -17,7 +17,6 @@ It use basic [C++14](https://isocpp.org/wiki/faq/cpp14-language) syntax, but not
 ## libraries used
 - [spdlog](https://github.com/gabime/spdlog) for a moderm log system. (included)
 - [catch](https://github.com/philsquared/Catch) as the test framework.  (included)
-- [boost](http://www.boost.org/) for additional tools. [(install)](#installing-boost)
 
 ##  project structure
 
@@ -72,24 +71,6 @@ MinGW Debug
   mingw32-make
   ctest -V -C Debug
 ```
-
-## installing boost
-
-Linux
-
-```shell
-  sudo apt-get install libboost-all-dev
-```
-
-MacOs
-
-```shell
-  brew install boost
-```
-
-Windows
-
-[Boost C++ Libraries Windows Installer](https://sourceforge.net/projects/boost/files/boost-binaries/)
 
 ## references
 

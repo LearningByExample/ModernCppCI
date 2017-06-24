@@ -1,4 +1,3 @@
-#include <boost/current_function.hpp>
 #include "calc.hpp"
 #include "log.hpp"
 
@@ -9,7 +8,7 @@ int main(int argc, char *argv[]) {
 
   Logger::level(log_level::info);
 
-  Logger log(BOOST_CURRENT_FUNCTION);
+  Logger log(__func__);
 
   Calc calc = Calc();
 

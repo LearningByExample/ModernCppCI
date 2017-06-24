@@ -1,10 +1,9 @@
 #include "log.hpp"
-
-#include <spdlog/spdlog.h>
-#include <spdlog/sinks/stdout_sinks.h>
-#include <spdlog/sinks/dist_sink.h>
-#include <spdlog/fmt/ostr.h>
 #include <memory>
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/stdout_sinks.h"
+#include "spdlog/sinks/dist_sink.h"
+#include "spdlog/fmt/ostr.h"
 
 #ifdef _WIN32
 
@@ -42,7 +41,7 @@ namespace Log {
 #if defined (_DEBUG) && defined(_MSC_VER)
     auto debug_sink = make_shared<spdlog::sinks::msvc_sink_st>();
     dist_sink->add_sink(debug_sink);
-#endif
+#endif // _DEBUG && _MSC_VER
 
     return spdlog::details::registry::instance().create("console", dist_sink);
   }

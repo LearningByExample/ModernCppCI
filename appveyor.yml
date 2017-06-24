@@ -1,15 +1,10 @@
 # version string format -- This will be overwritten later anyway
 version: "{build}"
 
-# specify custom environment variables
-environment:
-  MSVC_DEFAULT_OPTIONS: ON
-  BOOST_BASE: C:\Libraries\boost
-  matrix:
-    - BOOST_LIB_VERSION: 1_64_0
-      os: Visual Studio 2017
-    - BOOST_LIB_VERSION: 1_63_0
-      os: Visual Studio 2015
+os:
+  - Visual Studio 2017
+  - Visual Studio 2015
+  - Visual Studio 2013
 
 init:
   - git config --global core.autocrlf input
@@ -25,6 +20,9 @@ platform:
   - Win32
   - x64
 
+environment:
+  BOOST_ROOT: C:\Libraries\boost_1_63_0
+
 # build Configurations, i.e. Debug, Release, etc.
 configuration:
   - Debug
@@ -32,7 +30,7 @@ configuration:
 
 #Cmake will autodetect the compiler, but we set the arch
 before_build:
-  - cmake -H. -BBuild -A%PLATFORM% -DBOOST_ROOT="%BOOST_BASE%_%BOOST_LIB_VERSION%"
+  - cmake -H. -BBuild -A%PLATFORM%
 
 # build with MSBuild
 build:

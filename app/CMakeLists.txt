@@ -17,7 +17,7 @@ file (GLOB APP_SOURCE_FILES "${APP_SRC_PATH}/*.cpp")
 add_executable (${APP_NAME} ${APP_SOURCE_FILES})
 
 #add the library
-target_link_libraries (${APP_NAME} ${LIB_NAME} ${THIRD_PARTY_LIBRARIES})
+target_link_libraries (${APP_NAME} ${LIB_NAME})
 
 #test
 enable_testing ()
