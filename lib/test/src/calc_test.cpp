@@ -1,7 +1,7 @@
-#include "catch.hpp"
 #include "calc.hpp"
 #include <memory>
 #include <iostream>
+#include <catch\catch.hpp>
 
 using namespace std;
 
@@ -87,7 +87,7 @@ namespace ModernCppCI {
 
       string_stream << calc[1]["+"][2];
 
-      REQUIRE(string_stream.str() == "3");
+      REQUIRE(string_stream.str() == "1 + 2 = 3");
     }
 
     TEST_CASE("default operation Plus will work", "[operations]") {
@@ -131,7 +131,7 @@ namespace ModernCppCI {
       REQUIRE(calc.total_steps() == 0);
 
       calc.AddStep(2);
-      calc.AddStep(DefaultOperations::Plus);
+      calc.AddStep(CalcStep("+", DefaultOperations::Plus));
       calc.AddStep(3);
 
       REQUIRE(calc.total_steps() == 3);
@@ -149,7 +149,7 @@ namespace ModernCppCI {
 
     TEST_CASE("creating CalcStep with an operation shouldn't have a value", "[calc step]") {
 
-      auto step = CalcStep([] (const int&, const int&) { return 0; });
+      auto step = CalcStep("Z", [] (const int&, const int&) { return 0; });
 
       REQUIRE(!step.has_value());
       REQUIRE(step.has_operation());

@@ -9,7 +9,9 @@ set (LIBRARY_SRC_PATH  "${LIBRARY_MODULE_PATH}/src" )
 set (LIBRARY_INCLUDE_PATH  "${LIBRARY_MODULE_PATH}/include")
 
 #set includes
-include_directories (${LIBRARY_INCLUDE_PATH})
+include_directories (${LIBRARY_INCLUDE_PATH} ${THIRD_PARTY_INCLUDE_PATH})
+
+message (STATUS "include_directories ${THIRD_PARTY_INCLUDE_PATH}")
 
 #set sources
 file (GLOB LIB_HEADER_FILES "${LIBRARY_INCLUDE_PATH}/*.hpp")

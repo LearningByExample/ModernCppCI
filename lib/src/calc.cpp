@@ -1,8 +1,12 @@
+#include "boost/current_function.hpp"
 #include "calc.hpp"
 
 using namespace std;
+using namespace Log;
 
 namespace ModernCppCI {
+
+  Logger Calc::logger_ = Logger("ModernCppCI::Calc");
 
   Calc::Calc() {
     AddOperation("+", DefaultOperations::Plus);
@@ -44,7 +48,7 @@ namespace ModernCppCI {
 
     auto new_calc = Calc(*this);
 
-    new_calc.AddStep(operation);
+    new_calc.AddStep(CalcStep(name, operation));
 
     return new_calc;
   }
@@ -62,30 +66,42 @@ namespace ModernCppCI {
   }
 
   int Calc::result() const {
+
+    logger_.debug("[{}]", BOOST_CURRENT_FUNCTION);
+
     int total = 0;
+    logger_.trace("total is {}", total);
     Operation operation_to_execute = DefaultOperations::Zero;
     bool execute_operation = false;
     bool first_value = true;
 
     for (auto step : steps_) {
+      logger_.trace("step = {}", step);
       if (step.has_operation()) {
+        logger_.trace("step is an operation");
         operation_to_execute = step.operation();
         execute_operation = true;
         continue;
       }
 
       if (step.has_value()) {
+        logger_.trace("step has value");
         if (first_value) {
+          logger_.trace("step is first step");
           total = step.value();
           first_value = false;
           continue;
         }
         if (execute_operation) {
+          logger_.trace("executing operation");
           total = operation_to_execute(total, step.value());
           execute_operation = false;
+          logger_.trace("total so far is = {}", total);
         }
       }
     }
+
+    logger_.debug("[{}] = {}", BOOST_CURRENT_FUNCTION, total);
 
     return total;
   }
@@ -100,8 +116,9 @@ namespace ModernCppCI {
     has_value_ = true;
   }
 
-  CalcStep::CalcStep(const Operation& operation) : CalcStep() {
+  CalcStep::CalcStep(const string& name, const Operation& operation) : CalcStep() {
     operation_ = operation;
+    operation_name_ = name;
     has_operation_ = true;
   }
 
@@ -121,8 +138,28 @@ namespace ModernCppCI {
     return operation_;
   }
 
+  string CalcStep::operation_name() const {
+    return operation_name_;
+  }
+
   std::ostream &operator<<(std::ostream &stream, const Calc& calc) {
-    stream << calc.result();
+
+    for (auto step : calc.steps_) {
+      stream << step << " ";
+    }
+
+    stream << "= " << calc.result();
+    return stream;
+  }
+
+  std::ostream & operator<<(std::ostream & stream, const CalcStep & step) {
+
+    if (step.has_value()) {
+      stream << step.value();
+    } else {
+      stream << step.operation_name();
+    }
+
     return stream;
   }
 

@@ -10,7 +10,7 @@ set (TEST_MODULE_PATH "${LIBRARY_MODULE_PATH}/test")
 set (TEST_SRC_PATH  "${TEST_MODULE_PATH}/src" )
 
 #set includes
-include_directories (${LIBRARY_INCLUDE_PATH} ${THIRD_PARTY_INCLUDE_PATH})
+include_directories (${LIBRARY_INCLUDE_PATH} ${TEST_THIRD_PARTY_INCLUDE_PATH})
 
 #set test sources
 file (GLOB TEST_SOURCE_FILES "${TEST_SRC_PATH}/*.cpp")
@@ -19,13 +19,13 @@ file (GLOB TEST_SOURCE_FILES "${TEST_SRC_PATH}/*.cpp")
 add_executable (${TEST_APP_NAME} ${TEST_SOURCE_FILES})
 
 #add the library
-target_link_libraries (${TEST_APP_NAME} ${LIB_NAME})
+target_link_libraries (${TEST_APP_NAME} ${LIB_NAME} ${THIRD_PARTY_LIBRARIES})
 
 # Turn on CMake testing capabilities
 enable_testing()
 
 #config cmake modules
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${THIRD_PARTY_CUSTOM_MODULES_PATH})
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${TEST_THIRD_PARTY_CUSTOM_MODULES_PATH})
 
 #parse catch tests
 include (ParseAndAddCatchTests)

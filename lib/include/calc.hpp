@@ -10,15 +10,46 @@
 #include <map>
 #include <functional>
 #include <list>
+#include "log.hpp"
 
 using namespace std;
+using namespace Log;
 
 namespace ModernCppCI {
 
   template<class Type> using Dictionary = map<string, Type>;
   typedef function<int(const int&, const int&)> Operation;
 
-  class CalcStep;
+  class CalcStep {
+
+  private:
+    CalcStep();
+
+  public:
+    CalcStep(const int& value);
+
+    CalcStep(const string& name, const Operation& operation);
+
+    bool has_value() const;
+
+    bool has_operation() const;
+
+    int value() const;
+
+    Operation operation() const;
+
+    friend std::ostream &operator<<(std::ostream &stream, const CalcStep& step);
+    
+    string operation_name() const;
+
+  private:
+    int value_;
+    Operation operation_;
+    string operation_name_;
+
+    bool has_value_ = false;
+    bool has_operation_ = false;    
+  };
 
   class Calc {
 
@@ -48,7 +79,7 @@ namespace ModernCppCI {
   private:
     list <CalcStep> steps_;
     Dictionary<Operation> operations_ = Dictionary<Operation>();
-
+    static Logger logger_;
   };
 
   namespace DefaultOperations {
@@ -59,31 +90,7 @@ namespace ModernCppCI {
     const Operation Zero = [] (const int& value1, const int& value2) { return 0; };
   }
 
-  class CalcStep {
 
-  private:
-    CalcStep();
-
-  public:
-    CalcStep(const int& value);
-
-    CalcStep(const Operation& operation);
-
-    bool has_value() const;
-
-    bool has_operation() const;
-
-    int value() const;
-
-    Operation operation() const;
-
-  private:
-    int value_;
-    Operation operation_;
-
-    bool has_value_ = false;
-    bool has_operation_ = false;
-  };
 }
 
 #endif //CALC_HPP

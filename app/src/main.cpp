@@ -1,15 +1,20 @@
+#include <boost/current_function.hpp>
 #include "calc.hpp"
-#include <iostream>
+#include "log.hpp"
 
-using namespace std;
 using namespace ModernCppCI;
+using namespace Log;
 
 int main(int argc, char *argv[]) {
-  cout << "Creating Calc" << endl;
+
+  Logger::level(log_level::info);
+
+  Logger log(BOOST_CURRENT_FUNCTION);
 
   Calc calc = Calc();
 
-  cout << "1 + 2 * 5 - 1 / 4 = " << calc[1]["+"][2]["*"][5]["-"][1]["/"][4] << endl;
+  log.info("doing some calculation");
+  log.info(calc[1]["+"][2]["*"][5]["-"][1]["/"][4]);
 
   return 0;
 }

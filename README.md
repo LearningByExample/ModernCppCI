@@ -12,9 +12,14 @@ This is an example of doing a Modern C++ project with CI.
 
 It use basic [C++14](https://isocpp.org/wiki/faq/cpp14-language) syntax, but nothing really complicated.
 
-[CMake](https://cmake.org/) is the chosen build system using [ctest](https://cmake.org/Wiki/CMake/Testing_With_CTest) and [catch](https://github.com/philsquared/Catch) test framework.
+[CMake](https://cmake.org/) is the chosen build system using [ctest](https://cmake.org/Wiki/CMake/Testing_With_CTest).
 
-# project structure
+## libraries used
+- [spdlog](https://github.com/gabime/spdlog) for a moderm log system. (included)
+- [catch](https://github.com/philsquared/Catch) as the test framework.  (included)
+- [boost](http://www.boost.org/) for additional tools. [(install)](#installing-boost)
+
+##  project structure
 
 | folder       | Content              |
 | ------------ | -------------------- |
@@ -30,7 +35,7 @@ It use basic [C++14](https://isocpp.org/wiki/faq/cpp14-language) syntax, but not
 | [/test/include](/test/include) | test includes        |
 | [/third_party](/third_party) | third party software        |
 
-# example usages
+## example usages
 
 Linux / MacOs: release auto detect compiler
 
@@ -68,9 +73,28 @@ MinGW Debug
   ctest -V -C Debug
 ```
 
-# references
+## installing boost
+
+Linux
+
+```shell
+  sudo apt-get install libboost-all-dev
+```
+
+MacOs
+
+```shell
+  brew install boost
+```
+
+Windows
+
+[Boost C++ Libraries Windows Installer](https://sourceforge.net/projects/boost/files/boost-binaries/)
+
+## references
 
 - https://github.com/philsquared/Catch
+- https://github.com/gabime/spdlog
 - https://github.com/cognitivewaves/CMake-VisualStudio-Example
 - http://derekmolloy.ie/hello-world-introductions-to-cmake/
 - https://cmake.org/Wiki/CMake/Testing_With_CTest

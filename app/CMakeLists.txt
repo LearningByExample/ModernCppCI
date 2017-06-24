@@ -8,7 +8,7 @@ set (APP_MODULE_PATH "${PROJECT_SOURCE_DIR}/app")
 set (APP_SRC_PATH  "${APP_MODULE_PATH}/src" )
 
 #set includes
-include_directories (${LIBRARY_INCLUDE_PATH})
+include_directories (${LIBRARY_INCLUDE_PATH} ${THIRD_PARTY_INCLUDE_PATH})
 
 #set sources
 file (GLOB APP_SOURCE_FILES "${APP_SRC_PATH}/*.cpp")
@@ -17,7 +17,7 @@ file (GLOB APP_SOURCE_FILES "${APP_SRC_PATH}/*.cpp")
 add_executable (${APP_NAME} ${APP_SOURCE_FILES})
 
 #add the library
-target_link_libraries (${APP_NAME} ${LIB_NAME})
+target_link_libraries (${APP_NAME} ${LIB_NAME} ${THIRD_PARTY_LIBRARIES})
 
 #test
 enable_testing ()
