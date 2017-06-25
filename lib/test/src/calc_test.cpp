@@ -19,39 +19,32 @@ namespace ModernCppCI {
     }
 
     TEST_CASE("we could use +", "[calc]") {
-      Calc calc = Calc();
+      auto calc = Calc() << 2 << "+" << 1;
 
-      auto result = calc[1]["+"][2].result();
-
-      REQUIRE(result == 3);
+      REQUIRE(calc.result() == 3);
     }
 
     TEST_CASE("we could use -", "[calc]") {
-      Calc calc = Calc();
+      auto calc = Calc() << 2 << "-" << 1;
 
-      auto result = calc[1]["-"][2].result();
-
-      REQUIRE(result == -1);
+      REQUIRE(calc.result() == 1);
     }
 
     TEST_CASE("we could use *", "[calc]") {
-      Calc calc = Calc();
+      auto calc = Calc() << 2 << "*" << 1;
 
-      auto result = calc[1]["*"][2].result();
-
-      REQUIRE(result == 2);
+      REQUIRE(calc.result() == 2);
     }
 
     TEST_CASE("we could use /", "[calc]") {
-      Calc calc = Calc();
+      auto calc = Calc() << 2 << "/" << 1;
 
-      auto result = calc[10]["/"][2].result();
-
-      REQUIRE(result == 5);
+      REQUIRE(calc.result() == 2);
     }
 
     TEST_CASE("we could add operations", "[calc]") {
-      Calc calc = Calc();
+      
+      auto calc = Calc();
 
       auto originalNumOperations = calc.total_operations();
 
@@ -61,34 +54,30 @@ namespace ModernCppCI {
 
       REQUIRE((numOperations - originalNumOperations) == 1);
 
-      auto result = calc[4]["^"][5].result();
+      auto result = (calc << 4 << "^" << 5).result();
 
       REQUIRE(result == 1024);
     }
 
     TEST_CASE("invalid operation return 0", "[calc]") {
-      Calc calc = Calc();
+      auto calc = Calc() << 2 << "random" << 1;
 
-      auto result = calc[1]["random"][2].result();
-
-      REQUIRE(result == 0);
+      REQUIRE(calc.result() == 0);
     }
 
     TEST_CASE("chain operations will work", "[calc]") {
-      Calc calc = Calc();
 
-      auto result = calc[1]["+"][2]["*"][5]["-"][1]["/"][4].result();
+      auto calc = Calc() << 1 << "+" << 2 << "*" << 5 << "-" << 1 << "/" << 4;
 
-      REQUIRE(result == 3);
+      REQUIRE(calc.result() == 3);
+
     }
 
     TEST_CASE("we could stream results", "[calc]") {
 
       ostringstream string_stream;
 
-      Calc calc = Calc();
-
-      string_stream << calc[1]["+"][2];
+      string_stream << (Calc() << 1 << "+" << 2);
 
       REQUIRE(string_stream.str() == "1 + 2 = 3");
     }
@@ -128,35 +117,17 @@ namespace ModernCppCI {
       REQUIRE(result == 0);
     }
 
-    TEST_CASE("adding steps will work", "[calc][calc step]") {
-      Calc calc = Calc();
+    TEST_CASE("adding steps will work", "[calc]") {
+      auto calc = Calc();
 
       REQUIRE(calc.total_steps() == 0);
 
       calc.add_step(2);
-      calc.add_step(CalcStep("+", DefaultOperations::Plus));
+      calc.add_step("+");
       calc.add_step(3);
 
       REQUIRE(calc.total_steps() == 3);
       REQUIRE(calc.result() == 5);
-    }
-
-    TEST_CASE("creating CalcStep with a value shouldn't have an operation", "[calc step]") {
-
-      auto step = CalcStep(123);
-
-      REQUIRE(step.has_value());
-      REQUIRE(!step.has_operation());
-      REQUIRE(step.value() == 123);
-    }
-
-    TEST_CASE("creating CalcStep with an operation shouldn't have a value", "[calc step]") {
-
-      auto step = CalcStep("Z", [] (const int&, const int&) { return 0; });
-
-      REQUIRE(!step.has_value());
-      REQUIRE(step.has_operation());
-      REQUIRE(step.operation()(1, 1) == 0);
     }
 
   }

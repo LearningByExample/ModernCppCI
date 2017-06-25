@@ -36,27 +36,32 @@ namespace ModernCppCI {
     steps_.push_back(step);
   }
 
-  Calc Calc::operator[](const string& name) {
-    auto operation = operations_[name];
+  void Calc::add_step(const string& operation_name) {
+    auto operation = operations_[operation_name];
 
     if (operation == nullptr) {
       operation = DefaultOperations::Zero;
     }
 
-    auto new_calc = Calc(*this);
-
-    new_calc.add_step(CalcStep(name, operation));
-
-    return new_calc;
+    add_step(CalcStep(operation_name, operation));
   }
 
-  Calc Calc::operator[](const int& value) {
+  Calc Calc::operator<<(const int& value) {
     auto new_calc = Calc(*this);
 
     new_calc.add_step(value);
 
     return new_calc;
   }
+
+  Calc Calc::operator<<(const string& operation_name) {
+    auto new_calc = Calc(*this);
+
+    new_calc.add_step(operation_name);
+
+    return new_calc;
+  }
+
 
   int Calc::result() const {
 
@@ -99,22 +104,6 @@ namespace ModernCppCI {
     return total;
   }
 
-  CalcStep::CalcStep() {
-    has_value_ = false;
-    has_operation_ = false;
-  }
-
-  CalcStep::CalcStep(const int& value) : CalcStep() {
-    value_ = value;
-    has_value_ = true;
-  }
-
-  CalcStep::CalcStep(const string& name, const Operation& operation) : CalcStep() {
-    operation_ = operation;
-    operation_name_ = name;
-    has_operation_ = true;
-  }
-
   std::ostream &operator<<(std::ostream &stream, const Calc& calc) {
 
     for (auto step : calc.steps_) {
@@ -122,17 +111,6 @@ namespace ModernCppCI {
     }
 
     stream << "= " << calc.result();
-    return stream;
-  }
-
-  std::ostream & operator<<(std::ostream & stream, const CalcStep & step) {
-
-    if (step.has_value()) {
-      stream << step.value();
-    } else {
-      stream << step.operation_name();
-    }
-
     return stream;
   }
 

@@ -54,8 +54,9 @@ namespace ModernCppCI {
       log(LogLevel::debug, fmt, arg1, args...);
     }
 
-    inline void debug(const char* value) {
-      debug("{}", value);
+    template <typename Arg1>
+    inline void debug(const Arg1 &arg1) {
+      debug("{}", arg1);
     }
 
     template <typename Arg1, typename... Args>
@@ -63,8 +64,9 @@ namespace ModernCppCI {
       log(LogLevel::trace, fmt, arg1, args...);
     }
 
-    inline void trace(const char* value) {
-      trace("{}", value);
+    template <typename Arg1>
+    inline void trace(const Arg1 &arg1) {
+      trace("{}", arg1);
     }
 
     template <typename Arg1, typename... Args>
@@ -72,17 +74,20 @@ namespace ModernCppCI {
       log(LogLevel::error, fmt, arg1, args...);
     }
 
-    inline void error(const char* value) {
-      error("{}", value);
+    template <typename Arg1>
+    inline void error(const Arg1 &arg1) {
+      error("{}", arg1);
     }
 
     inline static void level(LogLevel level) {
       spdlog::set_level((spdlog::level::level_enum) level);
     }
 
+
   private:
     string section_;
     static std::shared_ptr<spdlog::logger> spdlog();
+
   };
 
 }

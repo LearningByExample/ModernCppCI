@@ -11,8 +11,8 @@
 
 #include <ostream>
 #include <map>
-#include <functional>
 #include <list>
+#include "calc_step.hpp"
 #include "logger.hpp"
 
 using namespace std;
@@ -20,47 +20,7 @@ using namespace std;
 namespace ModernCppCI {
 
   template<class Type> using Dictionary = map<string, Type>;
-  typedef function<int(const int&, const int&)> Operation;
 
-  class CalcStep {
-
-  private:
-    CalcStep();
-
-  public:
-    CalcStep(const int& value);
-
-    CalcStep(const string& name, const Operation& operation);
-
-    inline auto has_value() const {
-      return has_value_;
-    }
-
-    inline auto has_operation() const {
-      return has_operation_;
-    }
-
-    inline auto value() const {
-      return value_;
-    }
-
-    inline auto operation() const {
-      return operation_;
-    }
-
-    inline auto operation_name() const {
-      return operation_name_;
-    }
-
-    friend std::ostream &operator<<(std::ostream &stream, const CalcStep& step);
-
-  private:
-    int value_;
-    Operation operation_;
-    string operation_name_;
-    bool has_value_ = false;
-    bool has_operation_ = false;
-  };
 
   class Calc {
 
@@ -79,15 +39,17 @@ namespace ModernCppCI {
 
     void add_step(const CalcStep& step);
 
-    Calc operator[](const string& name);
-
-    Calc operator[](const int& value);
+    void add_step(const string& operation_name);
 
     inline auto total_steps() const {
       return steps_.size();
     }
 
     int result() const;
+
+    Calc operator<<(const int& value);
+
+    Calc operator<<(const string& operation_name);
 
     friend std::ostream &operator<<(std::ostream &stream, const Calc& calc);
 

@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
   Calc calc = Calc();
 
   log.info("doing some calculation");
-  log.info(calc[1]["+"][2]["*"][5]["-"][1]["/"][4]);
+  log.info(Calc() << 1 << "+" << 2 << "*" << 5 << "-" << 1 << "/" << 4);
 
   return 0;
 }
