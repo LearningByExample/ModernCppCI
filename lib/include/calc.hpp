@@ -51,7 +51,7 @@ namespace ModernCppCI {
 
     Calc operator<<(const string& operation_name);
 
-    friend std::ostream &operator<<(std::ostream &stream, const Calc& calc);
+    friend std::ostream& operator<<(std::ostream &stream, const Calc& calc);
 
   private:
     list <CalcStep> steps_;

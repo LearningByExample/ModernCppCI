@@ -104,7 +104,7 @@ namespace ModernCppCI {
     return total;
   }
 
-  std::ostream &operator<<(std::ostream &stream, const Calc& calc) {
+  std::ostream& operator<<(std::ostream &stream, const Calc& calc) {
 
     for (auto step : calc.steps_) {
       stream << step << " ";

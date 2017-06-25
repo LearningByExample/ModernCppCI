@@ -22,10 +22,10 @@ namespace ModernCppCI {
     has_operation_ = true;
   }
 
-  std::ostream & operator<<(std::ostream& stream, const CalcStep& step) {
+  std::ostream& operator<<(std::ostream& stream, const CalcStep& step) {
 
     if (step.has_value()) {
-      stream << step.value();
+      stream << to_string(step.value());
     } else {
       stream << step.operation_name();
     }
