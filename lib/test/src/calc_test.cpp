@@ -1,7 +1,10 @@
+/*
+ *  Distributed under the MIT License (See accompanying file /LICENSE )
+ */
 #include "calc.hpp"
 #include <memory>
 #include <iostream>
-#include <catch\catch.hpp>
+#include <catch/catch.hpp>
 
 using namespace std;
 
@@ -52,7 +55,7 @@ namespace ModernCppCI {
 
       auto originalNumOperations = calc.total_operations();
 
-      calc.AddOperation("^", [] (const int& value1, const int& value2) { return (int) pow(value1, value2); });
+      calc.add_operation("^", [] (const int& value1, const int& value2) { return (int) pow(value1, value2); });
 
       auto numOperations = calc.total_operations();
 
@@ -130,9 +133,9 @@ namespace ModernCppCI {
 
       REQUIRE(calc.total_steps() == 0);
 
-      calc.AddStep(2);
-      calc.AddStep(CalcStep("+", DefaultOperations::Plus));
-      calc.AddStep(3);
+      calc.add_step(2);
+      calc.add_step(CalcStep("+", DefaultOperations::Plus));
+      calc.add_step(3);
 
       REQUIRE(calc.total_steps() == 3);
       REQUIRE(calc.result() == 5);

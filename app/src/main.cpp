@@ -1,12 +1,11 @@
 #include "calc.hpp"
-#include "log.hpp"
+#include "logger.hpp"
 
 using namespace ModernCppCI;
-using namespace Log;
 
 int main(int argc, char *argv[]) {
 
-  Logger::level(log_level::info);
+  Logger::level(info);
 
   Logger log(__func__);
 

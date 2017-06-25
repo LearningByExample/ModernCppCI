@@ -1,3 +1,5 @@
+# Distributed under the MIT License (See accompanying file /LICENSE )
+
 # CMake build : library tests
 
 #configure variables

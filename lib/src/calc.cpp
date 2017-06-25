@@ -1,17 +1,19 @@
+/*
+ *  Distributed under the MIT License (See accompanying file /LICENSE )
+ */
 #include "calc.hpp"
 
 using namespace std;
-using namespace Log;
 
 namespace ModernCppCI {
 
   Logger Calc::logger_ = Logger("ModernCppCI::Calc");
 
   Calc::Calc() {
-    AddOperation("+", DefaultOperations::Plus);
-    AddOperation("-", DefaultOperations::Minus);
-    AddOperation("*", DefaultOperations::Times);
-    AddOperation("/", DefaultOperations::Div);
+    add_operation("+", DefaultOperations::Plus);
+    add_operation("-", DefaultOperations::Minus);
+    add_operation("*", DefaultOperations::Times);
+    add_operation("/", DefaultOperations::Div);
   }
 
   Calc::Calc(const Calc &other) : Calc() {
@@ -26,15 +28,11 @@ namespace ModernCppCI {
     return *this;
   }
 
-  void Calc::AddOperation(const string& name, const Operation& operation) {
+  void Calc::add_operation(const string& name, const Operation& operation) {
     operations_[name] = operation;
   }
 
-  unsigned int Calc::total_operations() const {
-    return operations_.size();
-  }
-
-  void Calc::AddStep(const CalcStep& step) {
+  void Calc::add_step(const CalcStep& step) {
     steps_.push_back(step);
   }
 
@@ -47,7 +45,7 @@ namespace ModernCppCI {
 
     auto new_calc = Calc(*this);
 
-    new_calc.AddStep(CalcStep(name, operation));
+    new_calc.add_step(CalcStep(name, operation));
 
     return new_calc;
   }
@@ -55,13 +53,9 @@ namespace ModernCppCI {
   Calc Calc::operator[](const int& value) {
     auto new_calc = Calc(*this);
 
-    new_calc.AddStep(value);
+    new_calc.add_step(value);
 
     return new_calc;
-  }
-
-  unsigned int Calc::total_steps() const {
-    return steps_.size();
   }
 
   int Calc::result() const {
@@ -119,26 +113,6 @@ namespace ModernCppCI {
     operation_ = operation;
     operation_name_ = name;
     has_operation_ = true;
-  }
-
-  bool CalcStep::has_value() const {
-    return has_value_;
-  }
-
-  bool CalcStep::has_operation() const {
-    return has_operation_;
-  }
-
-  int CalcStep::value() const {
-    return value_;
-  }
-
-  Operation CalcStep::operation() const {
-    return operation_;
-  }
-
-  string CalcStep::operation_name() const {
-    return operation_name_;
   }
 
   std::ostream &operator<<(std::ostream &stream, const Calc& calc) {

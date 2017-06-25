@@ -1,3 +1,6 @@
+/*
+ *  Distributed under the MIT License (See accompanying file /LICENSE )
+ */
 #ifndef CALC_HPP
 #define CALC_HPP
 
@@ -10,10 +13,9 @@
 #include <map>
 #include <functional>
 #include <list>
-#include "log.hpp"
+#include "logger.hpp"
 
 using namespace std;
-using namespace Log;
 
 namespace ModernCppCI {
 
@@ -30,25 +32,34 @@ namespace ModernCppCI {
 
     CalcStep(const string& name, const Operation& operation);
 
-    bool has_value() const;
+    inline auto CalcStep::has_value() const {
+      return has_value_;
+    }
 
-    bool has_operation() const;
+    inline auto CalcStep::has_operation() const {
+      return has_operation_;
+    }
 
-    int value() const;
+    inline auto CalcStep::value() const {
+      return value_;
+    }
 
-    Operation operation() const;
+    inline auto CalcStep::operation() const {
+      return operation_;
+    }
+
+    inline auto CalcStep::operation_name() const {
+      return operation_name_;
+    }
 
     friend std::ostream &operator<<(std::ostream &stream, const CalcStep& step);
-    
-    string operation_name() const;
 
   private:
     int value_;
     Operation operation_;
     string operation_name_;
-
     bool has_value_ = false;
-    bool has_operation_ = false;    
+    bool has_operation_ = false;
   };
 
   class Calc {
@@ -60,17 +71,21 @@ namespace ModernCppCI {
 
     Calc& operator=(const Calc& other);
 
-    void AddOperation(const string& name, const Operation& operation);
+    void add_operation(const string& name, const Operation& operation);
 
-    unsigned int total_operations() const;
+    inline auto Calc::total_operations() const {
+      return operations_.size();
+    }
 
-    void AddStep(const CalcStep& step);
+    void add_step(const CalcStep& step);
 
     Calc operator[](const string& name);
 
     Calc operator[](const int& value);
 
-    unsigned int total_steps() const;
+    inline auto Calc::total_steps() const {
+      return steps_.size();
+    }
 
     int result() const;
 
@@ -89,7 +104,6 @@ namespace ModernCppCI {
     const Operation Div = [] (const int& value1, const int& value2) { return value1 / value2; };
     const Operation Zero = [] (const int& value1, const int& value2) { return 0; };
   }
-
 
 }
 
