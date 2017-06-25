@@ -2,6 +2,7 @@
 *  Distributed under the MIT License (See accompanying file /LICENSE )
 */
 #include "calc_step.hpp"
+#include <string>
 
 using namespace std;
 
