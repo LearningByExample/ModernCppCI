@@ -5,7 +5,7 @@
 | Build status          | Systems / Compilers         |
 | ------------- | ------------------------------------------ |
 | [![CLang  / GCC / XCode Builds](https://travis-ci.org/LearningByExample/ModernCppCI.svg?branch=master)](https://travis-ci.org/LearningByExample/ModernCppCI) | Linux (clang38  / gcc6) OSX (XCode 8.3 clang) |
-| [![Visual Studio Builds](https://ci.appveyor.com/api/projects/status/t6i95u07gw1gqhql/branch/master?svg=true)](https://ci.appveyor.com/project/juan-medina/moderncppci/branch/master)       | Windows (Visual Studio 2017 / 2015 / 2013)  |
+| [![Visual Studio Builds](https://ci.appveyor.com/api/projects/status/t6i95u07gw1gqhql/branch/master?svg=true)](https://ci.appveyor.com/project/juan-medina/moderncppci/branch/master)       | Windows (Visual Studio 2017 / 2015)  |
 
 ## info
 This is an example of doing a Modern C++ project with CI.
