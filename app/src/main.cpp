@@ -1,5 +1,6 @@
-#include <sstream>
-#include <string>
+/*
+ *  Distributed under the MIT License (See accompanying file /LICENSE )
+ */
 #include "calc.hpp"
 #include "logger.hpp"
 
