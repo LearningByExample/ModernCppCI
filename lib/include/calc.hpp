@@ -32,23 +32,23 @@ namespace ModernCppCI {
 
     CalcStep(const string& name, const Operation& operation);
 
-    inline auto CalcStep::has_value() const {
+    inline auto has_value() const {
       return has_value_;
     }
 
-    inline auto CalcStep::has_operation() const {
+    inline auto has_operation() const {
       return has_operation_;
     }
 
-    inline auto CalcStep::value() const {
+    inline auto value() const {
       return value_;
     }
 
-    inline auto CalcStep::operation() const {
+    inline auto operation() const {
       return operation_;
     }
 
-    inline auto CalcStep::operation_name() const {
+    inline auto operation_name() const {
       return operation_name_;
     }
 
@@ -73,7 +73,7 @@ namespace ModernCppCI {
 
     void add_operation(const string& name, const Operation& operation);
 
-    inline auto Calc::total_operations() const {
+    inline auto total_operations() const {
       return operations_.size();
     }
 
@@ -83,7 +83,7 @@ namespace ModernCppCI {
 
     Calc operator[](const int& value);
 
-    inline auto Calc::total_steps() const {
+    inline auto total_steps() const {
       return steps_.size();
     }
 
