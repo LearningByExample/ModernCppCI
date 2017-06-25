@@ -2,11 +2,7 @@
  *  Distributed under the MIT License (See accompanying file /LICENSE )
  */
 #include "logger.hpp"
-#include <memory>
-#include <spdlog/spdlog.h>
-#include <spdlog/sinks/stdout_sinks.h>
 #include <spdlog/sinks/dist_sink.h>
-#include <spdlog/fmt/ostr.h>
 
 #ifdef _WIN32
 
