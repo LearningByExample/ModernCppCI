@@ -66,5 +66,5 @@ before_script:
   - cd Build
 
 script:
-  - make -j 2 -v
+  - make -j 2
   - ctest -V -j 2

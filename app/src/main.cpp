@@ -1,3 +1,5 @@
+#include <sstream>
+#include <string>
 #include "calc.hpp"
 #include "logger.hpp"
 
