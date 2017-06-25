@@ -28,6 +28,10 @@ namespace ModernCppCI {
   public:
     Logger(const string& section);
 
+    auto section() const {
+      return section_;
+    }
+
     template <typename Arg1, typename... Args>
     inline void log(LogLevel level, const char* fmt, const Arg1 &arg1, const Args&... args) {
       string new_fmt = "[{}] " + string(fmt);
@@ -74,10 +78,6 @@ namespace ModernCppCI {
 
     inline static void level(LogLevel level) {
       spdlog::set_level((spdlog::level::level_enum) level);
-    }
-
-    auto section() const {
-      return section_;
     }
 
   private:
