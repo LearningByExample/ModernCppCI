@@ -50,7 +50,7 @@ MacOs: generate XCode debug project
 ```shell
   cmake -H. -BBuild -DCMAKE_BUILD_TYPE=Debug -G Xcode
   cd Build
-  make
+  cmake --build .
   ctest -V
 ```
 
@@ -59,7 +59,7 @@ Visual Studio : x64 Debug auto detect compiler
 ```bat
   cmake -H. -BBuild -Ax64
   cd Build
-  msbuild ModernCppCI.sln
+  cmake --build .
   ctest -V -C Debug
 ```
 
@@ -68,7 +68,7 @@ MinGW Debug
 ```bat
   cmake -H. -BBuild -DCMAKE_BUILD_TYPE=Debug -G "MinGW Makefiles"
   cd Build
-  mingw32-make
+  cmake --build .
   ctest -V -C Debug
 ```
 
