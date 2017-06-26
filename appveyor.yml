@@ -19,9 +19,6 @@ platform:
   - Win32
   - x64
 
-environment:
-  BOOST_ROOT: C:\Libraries\boost_1_63_0
-
 # build Configurations, i.e. Debug, Release, etc.
 configuration:
   - Debug
