@@ -34,42 +34,68 @@ It use basic [C++14](https://isocpp.org/wiki/faq/cpp14-language) syntax, but not
 | [/test/include](/test/include) | test includes        |
 | [/third_party](/third_party) | third party software        |
 
-## example usages
-
-Linux / MacOs: release auto detect compiler
+## Generate project
 
 ```shell
+  cmake -H. -BBuild
+```
+
+Auto detect everything.
+
+If you like to set a implicit compiler set the variable CXX=${COMPILER}, for example COMPILER could be gcc, clang and so on.
+
+Auto detect in Windows usually generate a Visual Studio project since msbuild require it, but in mac does not generate and XCode project, since is not required for compiling using XCode clang.
+
+Specify build type debug/release
+
+```shell
+  # generate a debug project
+  cmake -H. -BBuild -DCMAKE_BUILD_TYPE=Debug
+  # generate a release project
   cmake -H. -BBuild -DCMAKE_BUILD_TYPE=Release
-  cd Build
-  make
-  ctest -V
 ```
 
-MacOs: generate XCode debug project
+Specify architecture
 
 ```shell
-  cmake -H. -BBuild -DCMAKE_BUILD_TYPE=Debug -G Xcode
-  cd Build
-  cmake --build .
-  ctest -V
-```
-
-Visual Studio : x64 Debug auto detect compiler
-
-```bat
+  # 64 bits architecture
   cmake -H. -BBuild -Ax64
-  cd Build
-  cmake --build .
-  ctest -V -C Debug
+  # ARM architecture
+  cmake -H. -BBuild -AARM
+  # Windows 32 bits architecture
+  cmake -H. -BBuild -AxWin32
 ```
 
-MinGW Debug
+Generate different project types
 
-```bat
-  cmake -H. -BBuild -DCMAKE_BUILD_TYPE=Debug -G "MinGW Makefiles"
-  cd Build
+```shell
+  # MinGW makefiles
+  cmake -H. -BBuild -G "MinGW Makefiles"
+  # XCode project
+  cmake -H. -BBuild -G "XCode"
+  # Visual Studio 15 2017 solution
+  cmake -H. -BBuild -G "Visual Studio 15 2017"
+```
+
+## Build
+
+From the Build folder
+
+```shell
+  # build the default build type (in multi build types usually debug)
   cmake --build .
-  ctest -V -C Debug
+  # build a specific build type
+  cmake --build .--config Release
+```
+## Run tests
+
+From the Build folder
+
+```shell
+  # run all test using the default build type
+  ctest -V
+  # run all test in Release build type
+  ctest -V -C Release
 ```
 
 ## references
