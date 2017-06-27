@@ -9,6 +9,8 @@ namespace ModernCppCI {
 CalcStep::CalcStep() {
   has_value_ = false;
   has_operation_ = false;
+  value_ = 0;
+  operation_ = nullptr;
 }
 
 CalcStep::CalcStep(const int &value) : CalcStep() {

@@ -67,7 +67,7 @@ int Calc::result() const {
   bool execute_operation = false;
   bool first_value = true;
 
-  for (auto step : steps_) {
+  for (const auto &step : steps_) {
     logger_.trace("step = {}", step);
     if (step.has_operation()) {
       logger_.trace("step is an operation");
@@ -99,7 +99,7 @@ int Calc::result() const {
 }
 
 std::ostream &operator<<(std::ostream &stream, const Calc &calc) {
-  for (auto step : calc.steps_) {
+  for (const auto &step : calc.steps_) {
     stream << step << " ";
   }
 

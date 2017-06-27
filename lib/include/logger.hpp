@@ -29,12 +29,12 @@ class Logger {
   auto section() const { return section_; }
 
   template <typename Arg1, typename... Args>
-  inline void log(LogLevel level, const char *fmt, const Arg1 &arg1,
+  inline void log(const LogLevel level, const char *fmt, const Arg1 &arg1,
                   const Args &... args) {
     auto new_fmt = "[{}] " + std::string(fmt);
 
-    spdlog()->log((spdlog::level::level_enum)level, new_fmt.c_str(), section(),
-                  arg1, args...);
+    spdlog()->log(static_cast<spdlog::level::level_enum>(level),
+                  new_fmt.c_str(), section(), arg1, args...);
   }
 
   template <typename Arg1, typename... Args>
@@ -77,8 +77,8 @@ class Logger {
     error("{}", arg1);
   }
 
-  inline static void level(LogLevel level) {
-    spdlog::set_level((spdlog::level::level_enum)level);
+  inline static void level(const LogLevel level) {
+    spdlog::set_level(static_cast<spdlog::level::level_enum>(level));
   }
 
  private:
