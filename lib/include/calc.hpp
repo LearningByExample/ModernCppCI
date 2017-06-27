@@ -6,67 +6,68 @@
 
 // MS compatible compilers support #pragma once
 #if defined(_MSC_VER)
-# pragma once
+#pragma once
 #endif
 
-#include <ostream>
-#include <map>
 #include <list>
+#include <map>
+#include <ostream>
 #include "calc_step.hpp"
 #include "logger.hpp"
 
-using namespace std;
-
 namespace ModernCppCI {
 
-  template<class Type> using Dictionary = map<string, Type>;
+template <class Type>
+using Dictionary = std::map<std::string, Type>;
 
+class Calc {
+ public:
+  Calc();
 
-  class Calc {
+  Calc(const Calc &other);
 
-  public:
-    Calc();
+  Calc &operator=(const Calc &other);
 
-    Calc(const Calc& other);
+  void add_operation(const std::string &name, const Operation &operation);
 
-    Calc& operator=(const Calc& other);
+  inline auto total_operations() const { return operations_.size(); }
 
-    void add_operation(const string& name, const Operation& operation);
+  void add_step(const CalcStep &step);
 
-    inline auto total_operations() const {
-      return operations_.size();
-    }
+  void add_step(const std::string &operation_name);
 
-    void add_step(const CalcStep& step);
+  inline auto total_steps() const { return steps_.size(); }
 
-    void add_step(const string& operation_name);
+  int result() const;
 
-    inline auto total_steps() const {
-      return steps_.size();
-    }
+  Calc operator<<(const int &value);
 
-    int result() const;
+  Calc operator<<(const std::string &operation_name);
 
-    Calc operator<<(const int& value);
+  friend std::ostream &operator<<(std::ostream &stream, const Calc &calc);
 
-    Calc operator<<(const string& operation_name);
+ private:
+  std::list<CalcStep> steps_;
+  Dictionary<Operation> operations_ = Dictionary<Operation>();
+  static Logger logger_;
+};
 
-    friend std::ostream& operator<<(std::ostream &stream, const Calc& calc);
+namespace DefaultOperations {
+const Operation Plus = [](const int &value1, const int &value2) {
+  return value1 + value2;
+};
+const Operation Minus = [](const int &value1, const int &value2) {
+  return value1 - value2;
+};
+const Operation Times = [](const int &value1, const int &value2) {
+  return value1 * value2;
+};
+const Operation Div = [](const int &value1, const int &value2) {
+  return value1 / value2;
+};
+const Operation Zero = [](const int &value1, const int &value2) { return 0; };
+}  // namespace DefaultOperations
 
-  private:
-    list <CalcStep> steps_;
-    Dictionary<Operation> operations_ = Dictionary<Operation>();
-    static Logger logger_;
-  };
+}  // namespace ModernCppCI
 
-  namespace DefaultOperations {
-    const Operation Plus = [] (const int& value1, const int& value2) { return value1 + value2; };
-    const Operation Minus = [] (const int& value1, const int& value2) { return value1 - value2; };
-    const Operation Times = [] (const int& value1, const int& value2) { return value1 * value2; };
-    const Operation Div = [] (const int& value1, const int& value2) { return value1 / value2; };
-    const Operation Zero = [] (const int& value1, const int& value2) { return 0; };
-  }
-
-}
-
-#endif //CALC_HPP
+#endif  // CALC_HPP

@@ -4,18 +4,16 @@
 #include "calc.hpp"
 #include "logger.hpp"
 
-using namespace ModernCppCI;
-
 int main(int argc, char *argv[]) {
+  ModernCppCI::Logger::level(ModernCppCI::LogLevel::debug);
 
-  Logger::level(info);
+  ModernCppCI::Logger log(__func__);
 
-  Logger log(__func__);
-
-  Calc calc = Calc();
+  auto calc = ModernCppCI::Calc();
 
   log.info("doing some calculation");
-  log.info(Calc() << 1 << "+" << 2 << "*" << 5 << "-" << 1 << "/" << 4);
+  log.info(ModernCppCI::Calc()
+           << 1 << "+" << 2 << "*" << 5 << "-" << 1 << "/" << 4);
 
   return 0;
 }
