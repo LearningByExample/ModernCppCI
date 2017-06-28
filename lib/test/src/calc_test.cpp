@@ -1,7 +1,7 @@
 /*
  *  Distributed under the MIT License (See accompanying file /LICENSE )
  */
-#include "calc.hpp"
+#include "calc.h"
 #include <catch/catch.hpp>
 #include <iostream>
 #include <memory>
@@ -17,63 +17,45 @@ TEST_CASE("calc should be created", "[calc]") {
 }
 
 TEST_CASE("we could use +", "[calc]") {
-  auto calc = Calc() << 2 << "+" << 1;
+  auto calc = Calc{} << 2 << "+" << 1;
 
   REQUIRE(calc.result() == 3);
 }
 
 TEST_CASE("we could use -", "[calc]") {
-  auto calc = Calc() << 2 << "-" << 1;
+  auto calc = Calc{} << 2 << "-" << 1;
 
   REQUIRE(calc.result() == 1);
 }
 
 TEST_CASE("we could use *", "[calc]") {
-  auto calc = Calc() << 2 << "*" << 1;
+  auto calc = Calc{} << 2 << "*" << 1;
 
   REQUIRE(calc.result() == 2);
 }
 
 TEST_CASE("we could use /", "[calc]") {
-  auto calc = Calc() << 2 << "/" << 1;
+  auto calc = Calc{} << 2 << "/" << 1;
 
   REQUIRE(calc.result() == 2);
 }
 
-TEST_CASE("we could add operations", "[calc]") {
-  auto calc = Calc();
-
-  auto originalNumOperations = calc.total_operations();
-
-  calc.add_operation("^", [](const int& value1, const int& value2) {
-    return (int)pow(value1, value2);
-  });
-
-  auto numOperations = calc.total_operations();
-
-  REQUIRE((numOperations - originalNumOperations) == 1);
-
-  auto result = (calc << 4 << "^" << 5).result();
-
-  REQUIRE(result == 1024);
-}
-
 TEST_CASE("invalid operation return 0", "[calc]") {
-  auto calc = Calc() << 2 << "random" << 1;
+  auto calc = Calc{} << 2 << "random" << 1;
 
   REQUIRE(calc.result() == 0);
 }
 
 TEST_CASE("chain operations will work", "[calc]") {
-  auto calc = Calc() << 1 << "+" << 2 << "*" << 5 << "-" << 1 << "/" << 4;
+  auto calc = Calc{} << 1 << "+" << 2 << "*" << 5 << "-" << 1 << "/" << 4;
 
   REQUIRE(calc.result() == 3);
 }
 
 TEST_CASE("we could stream results", "[calc]") {
-  std::ostringstream string_stream;
+  std::ostringstream string_stream{};
 
-  string_stream << (Calc() << 1 << "+" << 2);
+  string_stream << (Calc{} << 1 << "+" << 2);
 
   REQUIRE(string_stream.str() == "1 + 2 = 3");
 }
@@ -109,7 +91,7 @@ TEST_CASE("default operation Zero will work", "[operations]") {
 }
 
 TEST_CASE("adding steps will work", "[calc]") {
-  auto calc = Calc();
+  Calc calc{};
 
   REQUIRE(calc.total_steps() == 0);
 

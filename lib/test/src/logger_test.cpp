@@ -1,39 +1,36 @@
 /*
  *  Distributed under the MIT License (See accompanying file /LICENSE )
  */
-#include "logger.hpp"
+#include "logger.h"
 #include <catch/catch.hpp>
 
 namespace ModernCppCI {
 
 namespace Test {
 
-class SimpleObject {
+class Person {
  public:
-  SimpleObject(const std::string& name, const unsigned int& age) {
-    name_ = name;
-    age_ = age;
-  }
+  Person(const std::string& name, const unsigned int& age) noexcept
+      : name_{name}, age_{age} {}
 
-  friend std::ostream& operator<<(std::ostream& stream,
-                                  const SimpleObject& object) {
+  friend std::ostream& operator<<(std::ostream& stream, const Person& object) {
     stream << "name: " << object.name_ << " age: " << object.age_;
     return stream;
   }
 
  private:
-  std::string name_;
-  unsigned int age_;
+  std::string name_{""};
+  unsigned int age_{0};
 };
 
 TEST_CASE("logger work as expected", "[logger]") {
-  auto log = Logger("logger test");
+  Logger log("logger test");
 
   SECTION("the section is correct") { REQUIRE(log.section() == "logger test"); }
 
   SECTION("we could set log level") {
     Logger::level(LogLevel::trace);
-    REQUIRE(true);
+    CHECK(true);
   }
 
   SECTION("we could info") {
@@ -81,24 +78,24 @@ TEST_CASE("logger work as expected", "[logger]") {
     REQUIRE(true);
   }
 
-  auto object = SimpleObject("test", 20);
+  Person person{"test", 20};
 
   SECTION("we could info objects") {
-    log.info(object);
+    log.info(person);
     REQUIRE(true);
   }
 
   SECTION("we could trace objects") {
-    log.trace(object);
+    log.trace(person);
     REQUIRE(true);
   }
 
   SECTION("we could debug objects") {
-    log.debug(object);
+    log.debug(person);
     REQUIRE(true);
   }
   SECTION("we could error objects") {
-    log.error(object);
+    log.error(person);
     REQUIRE(true);
   }
 }

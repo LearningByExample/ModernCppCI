@@ -3,12 +3,13 @@
  */
 #define CATCH_CONFIG_RUNNER
 #include <catch/catch.hpp>
-#include "logger.hpp"
+#include "logger.h"
 
 int main(int argc, char* argv[]) {
-  ModernCppCI::Logger::level(ModernCppCI::LogLevel::debug);
+  using namespace ModernCppCI;
+  Logger::level(LogLevel::debug);
 
-  int result = Catch::Session().run(argc, argv);
+  auto result = Catch::Session().run(argc, argv);
 
   return (result < 0xff ? result : 0xff);
 }

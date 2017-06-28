@@ -15,18 +15,18 @@
 
 namespace ModernCppCI {
 
-typedef enum {
+enum class LogLevel {
   info = spdlog::level::level_enum::info,
   trace = spdlog::level::level_enum::trace,
   debug = spdlog::level::level_enum::debug,
   error = spdlog::level::level_enum::err
-} LogLevel;
+};
 
 class Logger {
  public:
-  Logger(const std::string &section);
+  Logger(const std::string &section) noexcept;
 
-  auto section() const { return section_; }
+  auto section() const noexcept { return section_; }
 
   template <typename Arg1, typename... Args>
   inline void log(const LogLevel level, const char *fmt, const Arg1 &arg1,
@@ -77,12 +77,12 @@ class Logger {
     error("{}", arg1);
   }
 
-  inline static void level(const LogLevel level) {
+  inline static void level(const LogLevel level) noexcept {
     spdlog::set_level(static_cast<spdlog::level::level_enum>(level));
   }
 
  private:
-  std::string section_;
+  std::string section_{""};
   static std::shared_ptr<spdlog::logger> spdlog();
 };
 

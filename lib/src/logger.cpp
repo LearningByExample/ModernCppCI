@@ -1,28 +1,22 @@
 /*
  *  Distributed under the MIT License (See accompanying file /LICENSE )
  */
-#include "logger.hpp"
+#include "logger.h"
 #include <spdlog/sinks/dist_sink.h>
 
 #ifdef _WIN32
-
 #include <spdlog/sinks/wincolor_sink.h>
+#else
+#include <spdlog/sinks/ansicolor_sink.h>
+#endif
 
 #if defined(_DEBUG) && defined(_MSC_VER)
-
 #include <spdlog/sinks/msvc_sink.h>
-
 #endif  // _DEBUG && _MSC_VER
-
-#else
-
-#include <spdlog/sinks/ansicolor_sink.h>
-
-#endif
 
 namespace ModernCppCI {
 
-Logger::Logger(const std::string &section) { section_ = section; }
+Logger::Logger(const std::string &section) noexcept : section_{section} {}
 
 auto create_spdlog() {
 #ifdef _WIN32

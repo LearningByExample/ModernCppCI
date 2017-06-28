@@ -1,71 +1,37 @@
 /*
  *  Distributed under the MIT License (See accompanying file /LICENSE )
  */
-#include "calc.hpp"
+#include "calc.h"
 
 namespace ModernCppCI {
 
-Logger Calc::logger_ = Logger("ModernCppCI::Calc");
-
-Calc::Calc() {
-  add_operation("+", DefaultOperations::Plus);
-  add_operation("-", DefaultOperations::Minus);
-  add_operation("*", DefaultOperations::Times);
-  add_operation("/", DefaultOperations::Div);
-}
-
-Calc::Calc(const Calc &other) : Calc() {
-  operations_ = other.operations_;
-  steps_ = other.steps_;
-}
-
-Calc &Calc::operator=(const Calc &other) {
-  operations_ = other.operations_;
-  steps_ = other.steps_;
+Calc &Calc::operator=(const Calc &other) noexcept {
+  operations_ = {other.operations_};
+  steps_ = {other.steps_};
 
   return *this;
-}
-
-void Calc::add_operation(const std::string &name, const Operation &operation) {
-  operations_[name] = operation;
 }
 
 void Calc::add_step(const CalcStep &step) { steps_.push_back(step); }
 
 void Calc::add_step(const std::string &operation_name) {
-  auto operation = operations_[operation_name];
+  auto &operation = operations_[operation_name];
 
   if (operation == nullptr) {
     operation = DefaultOperations::Zero;
   }
 
-  add_step(CalcStep(operation_name, operation));
-}
-
-Calc Calc::operator<<(const int &value) {
-  auto new_calc = Calc(*this);
-
-  new_calc.add_step(value);
-
-  return new_calc;
-}
-
-Calc Calc::operator<<(const std::string &operation_name) {
-  auto new_calc = Calc(*this);
-
-  new_calc.add_step(operation_name);
-
-  return new_calc;
+  add_step(CalcStep{operation_name, operation});
 }
 
 int Calc::result() const {
   logger_.debug("[{}]", __func__);
 
-  int total = 0;
+  int total{0};
   logger_.trace("total is {}", total);
-  Operation operation_to_execute = DefaultOperations::Zero;
-  bool execute_operation = false;
-  bool first_value = true;
+  Operation operation_to_execute{DefaultOperations::Zero};
+  bool execute_operation{false};
+  bool first_value{true};
 
   for (const auto &step : steps_) {
     logger_.trace("step = {}", step);
@@ -98,6 +64,22 @@ int Calc::result() const {
   return total;
 }
 
+Calc Calc::operator<<(const int &value) {
+  auto new_calc = Calc {*this};
+
+  new_calc.add_step(CalcStep {value});
+
+  return new_calc;
+}
+
+Calc Calc::operator<<(const std::string &operation_name) {
+  auto new_calc = Calc {*this};
+
+  new_calc.add_step(operation_name);
+
+  return new_calc;
+}
+
 std::ostream &operator<<(std::ostream &stream, const Calc &calc) {
   for (const auto &step : calc.steps_) {
     stream << step << " ";
@@ -106,5 +88,7 @@ std::ostream &operator<<(std::ostream &stream, const Calc &calc) {
   stream << "= " << calc.result();
   return stream;
 }
+
+Logger Calc::logger_ = Logger {"ModernCppCI::Calc"};
 
 }  // namespace ModernCppCI

@@ -1,19 +1,19 @@
 /*
  *  Distributed under the MIT License (See accompanying file /LICENSE )
  */
-#include "calc.hpp"
-#include "logger.hpp"
+#include "calc.h"
+#include "logger.h"
 
 int main(int argc, char *argv[]) {
-  ModernCppCI::Logger::level(ModernCppCI::LogLevel::debug);
+  using namespace ModernCppCI;
+  Logger::level(LogLevel::info);
 
-  ModernCppCI::Logger log(__func__);
+  Logger log{__func__};
 
-  auto calc = ModernCppCI::Calc();
+  Calc calc{};
 
   log.info("doing some calculation");
-  log.info(ModernCppCI::Calc()
-           << 1 << "+" << 2 << "*" << 5 << "-" << 1 << "/" << 4);
+  log.info(Calc{} << 1 << "+" << 2 << "*" << 5 << "-" << 1 << "/" << 4);
 
   return 0;
 }
