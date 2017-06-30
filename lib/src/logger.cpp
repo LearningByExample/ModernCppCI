@@ -16,8 +16,6 @@
 
 namespace ModernCppCI {
 
-Logger::Logger(const std::string &section) noexcept : section_{section} {}
-
 auto create_spdlog() {
 #ifdef _WIN32
   auto color_sink = std::make_shared<spdlog::sinks::wincolor_stdout_sink_mt>();
@@ -36,14 +34,16 @@ auto create_spdlog() {
   return spdlog::details::registry::instance().create("console", dist_sink);
 }
 
-std::shared_ptr<spdlog::logger> Logger::spdlog() {
-  auto logger = spdlog::get("console");
+Logger::Logger(const std::string &section) : section_{section} {
+  internal_logger_ = spdlog::get("console");
 
-  if (logger == nullptr) {
-    logger = create_spdlog();
+  if (internal_logger_ == nullptr) {
+    internal_logger_ = create_spdlog();
   }
+}
 
-  return logger;
+Logger operator""_log(const char *p, size_t n) {
+  return Logger{std::string{p, n}};
 }
 
 }  // namespace ModernCppCI

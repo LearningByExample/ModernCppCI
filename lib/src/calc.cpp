@@ -2,6 +2,7 @@
  *  Distributed under the MIT License (See accompanying file /LICENSE )
  */
 #include "calc.h"
+#include <typeinfo>
 
 namespace ModernCppCI {
 
@@ -65,15 +66,15 @@ int Calc::result() const {
 }
 
 Calc Calc::operator<<(const int &value) {
-  auto new_calc = Calc {*this};
+  auto new_calc = Calc{*this};
 
-  new_calc.add_step(CalcStep {value});
+  new_calc.add_step(CalcStep{value});
 
   return new_calc;
 }
 
 Calc Calc::operator<<(const std::string &operation_name) {
-  auto new_calc = Calc {*this};
+  auto new_calc = Calc{*this};
 
   new_calc.add_step(operation_name);
 
@@ -89,6 +90,6 @@ std::ostream &operator<<(std::ostream &stream, const Calc &calc) {
   return stream;
 }
 
-Logger Calc::logger_ = Logger {"ModernCppCI::Calc"};
+Logger Calc::logger_{typeid(Calc).name()};
 
 }  // namespace ModernCppCI
