@@ -42,8 +42,4 @@ Logger::Logger(const std::string &section) : section_{section} {
   }
 }
 
-Logger operator""_log(const char *p, size_t n) {
-  return Logger{std::string{p, n}};
-}
-
 }  // namespace ModernCppCI
