@@ -55,9 +55,12 @@ class Calc {
 
   int result() const;
 
-  Calc operator<<(const int &value);
-
-  Calc operator<<(const std::string &operation_name);
+  template <typename T>
+  Calc operator<<(const T &value) const {
+    Calc new_calc{*this};
+    new_calc.add_step(value);
+    return new_calc;
+  }
 
   friend std::ostream &operator<<(std::ostream &stream, const Calc &calc);
 

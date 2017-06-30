@@ -65,22 +65,6 @@ int Calc::result() const {
   return total;
 }
 
-Calc Calc::operator<<(const int &value) {
-  auto new_calc = Calc{*this};
-
-  new_calc.add_step(CalcStep{value});
-
-  return new_calc;
-}
-
-Calc Calc::operator<<(const std::string &operation_name) {
-  auto new_calc = Calc{*this};
-
-  new_calc.add_step(operation_name);
-
-  return new_calc;
-}
-
 std::ostream &operator<<(std::ostream &stream, const Calc &calc) {
   for (const auto &step : calc.steps_) {
     stream << step << " ";
