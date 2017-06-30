@@ -15,6 +15,8 @@ Calc &Calc::operator=(const Calc &other) noexcept {
 
 void Calc::add_step(const CalcStep &step) { steps_.push_back(step); }
 
+void Calc::add_step(const int value) { add_step(CalcStep{value}); }
+
 void Calc::add_step(const std::string &operation_name) {
   auto &operation = operations_[operation_name];
 

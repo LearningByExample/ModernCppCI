@@ -21,7 +21,8 @@ class CalcStep {
   CalcStep() noexcept {};
 
  public:
-  CalcStep(const int &value) noexcept : value_{value}, has_value_{true} {}
+  explicit CalcStep(const int &value) noexcept
+      : value_{value}, has_value_{true} {}
 
   CalcStep(const std::string &name, const Operation &operation) noexcept
       : operation_{operation}, operation_name_{name}, has_operation_{true} {}

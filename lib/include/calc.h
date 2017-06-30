@@ -49,6 +49,8 @@ class Calc {
 
   void add_step(const CalcStep &step);
 
+  void add_step(const int value);
+
   void add_step(const std::string &operation_name);
 
   auto total_steps() const noexcept { return steps_.size(); }
