@@ -10,6 +10,9 @@ init:
   # Set build version to git commit-hash
   - ps: Update-AppveyorBuild -Version "$($env:APPVEYOR_REPO_BRANCH) - $($env:APPVEYOR_REPO_COMMIT)"
 
+install:
+  - git submodule update --init --recursive
+
 # fetch repository as zip archive
 shallow_clone: true
 
