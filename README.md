@@ -1,5 +1,7 @@
 # Modern C++ CI
 
+[<img src="https://raw.githubusercontent.com/isocpp/logos/master/cpp_logo.png" height="25"/> <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Cmake.svg" height="25"/> <img src="https://github.com/philsquared/Catch/blob/master/catch-logo-small.png" height="25"/> <img src="https://cdn.travis-ci.com/images/logos/TravisCI-Full-Color-45e242791b7752b745a7ae53f265acd4.png" height="25"/> <img src="https://dka575ofm4ao0.cloudfront.net/pages-transactional_logos/retina/16896/ApwXsQaJT16xVdsGs7aY" height="25"/>](#references)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](/LICENSE)
 
 | Build status          | Systems / Compilers         |
@@ -12,11 +14,13 @@ This is an example of doing a Modern C++ project with CI.
 
 It use basic [C++14](https://isocpp.org/wiki/faq/cpp14-language) syntax, but nothing really complicated.
 
+This project try to follow [C++ Core Guidelines](https://github.com/isocpp/CppCoreGuidelines) whenever its possible.
+
 [CMake](https://cmake.org/) is the chosen build system using [ctest](https://cmake.org/Wiki/CMake/Testing_With_CTest).
 
 ## libraries used
-- [spdlog](https://github.com/gabime/spdlog) for a moderm log system. (included)
-- [catch](https://github.com/philsquared/Catch) as the test framework.  (included)
+- [spdlog](https://github.com/gabime/spdlog) for a moderm log system. (as submodule)
+- [catch](https://github.com/philsquared/Catch) as the test framework.  (as submodule)
 
 ##  project structure
 
@@ -100,6 +104,10 @@ From the Build folder
 
 ## references
 
+- https://cmake.org/
+- https://docs.travis-ci.com/user/languages/cpp/
+- https://www.appveyor.com/docs/lang/cpp/
+- https://github.com/isocpp/CppCoreGuidelines
 - https://github.com/philsquared/Catch
 - https://github.com/gabime/spdlog
 - https://github.com/cognitivewaves/CMake-VisualStudio-Example
