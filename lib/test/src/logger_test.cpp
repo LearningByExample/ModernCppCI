@@ -2,7 +2,7 @@
  *  Distributed under the MIT License (See accompanying file /LICENSE )
  */
 #include "logger.h"
-#include <catch/catch.hpp>
+#include <catch.hpp>
 
 namespace ModernCppCI {
 

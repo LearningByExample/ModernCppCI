@@ -85,7 +85,7 @@ From the Build folder
   # build the default build type (in multi build types usually debug)
   cmake --build .
   # build a specific build type
-  cmake --build .--config Release
+  cmake --build . --config Release
 ```
 ## Run tests
 
