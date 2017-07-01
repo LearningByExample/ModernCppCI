@@ -26,9 +26,5 @@ target_link_libraries (${TEST_APP_NAME} ${LIB_NAME} Threads::Threads)
 # Turn on CMake testing capabilities
 enable_testing()
 
-#config cmake modules
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${TEST_THIRD_PARTY_CUSTOM_MODULES_PATH})
-
 #parse catch tests
-include (ParseAndAddCatchTests)
 ParseAndAddCatchTests (${TEST_APP_NAME})
