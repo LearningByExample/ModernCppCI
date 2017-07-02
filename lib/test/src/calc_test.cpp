@@ -47,7 +47,7 @@ TEST_CASE("invalid operation return 0", "[calc]") {
 }
 
 TEST_CASE("chain operations will work", "[calc]") {
-  auto calc = Calc{} << 1 << "+" << 2 << "*" << 5 << "-" << 1 << "/" << 4;
+  auto calc = Calc{} << 1 << "+" << 2 << "*" << 5 << "-" << 3 << "/" << 4;
 
   REQUIRE(calc.result() == 3);
 }

@@ -1,5 +1,5 @@
 language: cpp
-sudo: true
+sudo: false
 
 matrix:
   include:
@@ -53,10 +53,8 @@ install:
       CMAKE_URL="http://www.cmake.org/files/v3.3/cmake-3.3.2-Linux-x86_64.tar.gz"
       mkdir cmake && travis_retry wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
       export PATH=${DEPS_DIR}/cmake/bin:${PATH}
-      sudo apt-get install libboost-all-dev
     elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
       which cmake || brew install cmake
-      brew outdated boost || brew upgrade boost
     fi
 
 before_script:

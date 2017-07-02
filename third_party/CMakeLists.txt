@@ -24,8 +24,6 @@ set (SPDLOG_INCLUDE_PATH "${SPDLOG_MODULE_PATH}/include")
 
 # -------------------------------------------------------------------------
 
-add_subdirectory (spdlog)
-
 #set variables
 set (THIRD_PARTY_INCLUDE_PATH  ${SPDLOG_INCLUDE_PATH})
 

@@ -10,10 +10,8 @@ int main(int argc, char *argv[]) {
 
   Logger log{__func__};
 
-  Calc calc{};
-
   log.info("doing some calculation");
-  log.info(Calc{} << 1 << "+" << 2 << "*" << 5 << "-" << 1 << "/" << 4);
+  log.info(Calc{} << 1 << "+" << 2 << "*" << 5 << "-" << 3 << "/" << 4);
 
   return 0;
 }

@@ -1,4 +1,6 @@
-# Modern C++ CI
+# Modern C++ Continuous Integration
+
+This project is illustrating [this blog post](https://juan-medina.com/2017/07/01/moderncppci/).
 
 [<img src="https://raw.githubusercontent.com/isocpp/logos/master/cpp_logo.png" height="25"/> <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Cmake.svg" height="25"/> <img src="https://github.com/philsquared/Catch/blob/master/catch-logo-small.png" height="25"/> <img src="https://cdn.travis-ci.com/images/logos/TravisCI-Full-Color-45e242791b7752b745a7ae53f265acd4.png" height="25"/> <img src="https://dka575ofm4ao0.cloudfront.net/pages-transactional_logos/retina/16896/ApwXsQaJT16xVdsGs7aY" height="25"/>](#references)
 
@@ -32,10 +34,7 @@ This project try to follow [C++ Core Guidelines](https://github.com/isocpp/CppCo
 | [/lib/test](/lib/test) | library test |
 | [/app](/app) | application |
 | [/app/src](/app/src) | application sources  |
-| [/app/include](/app/include) | application includes |
 | [/app/test](/app/test) | application test |
-| [/test/src](/test/src) | test sources |
-| [/test/include](/test/include) | test includes        |
 | [/third_party](/third_party) | third party software        |
 
 ## Generate project
@@ -48,7 +47,7 @@ Auto detect everything.
 
 If you like to set a implicit compiler set the variable CXX=${COMPILER}, for example COMPILER could be gcc, clang and so on.
 
-Auto detect in Windows usually generate a Visual Studio project since msbuild require it, but in mac does not generate and XCode project, since is not required for compiling using XCode clang.
+Auto detect in Windows usually generate a Visual Studio project since msbuild require it, but in OSX does not generate and XCode project, since is not required for compiling using XCode clang.
 
 Specify build type debug/release
 
